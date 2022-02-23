@@ -17,7 +17,7 @@
 
 - Spark
 
-## Edit
+## Editor
 
 - Visual Studio Code
 - Emacs
