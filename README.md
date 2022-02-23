@@ -31,11 +31,11 @@
 
 - Zettlr
 - Zotero
+- MacTex
 
 ## PDF
 
 - Calibre
-
 
 ## Vedio
 
