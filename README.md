@@ -4,6 +4,7 @@
 
 - oh-my-zsh
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k)
+- [nerd-fonts](https://github.com/ryanoasis/nerd-fonts)
 
 ## ITERM2
 
