@@ -57,7 +57,7 @@ sudo rm -rf /usr/local/go && sudo tar -xzf /tmp/go.tar.gz
 sudo mkdir .go .go/bin
 sudo mv $HOME/go/bin $HOME/.go/bin
 
-cat $HOME/.go/env << EOF
+cat > $HOME/.go/env << EOF
 case ":${PATH}:" in
     *:"$HOME/.go/bin":*)
         ;;
