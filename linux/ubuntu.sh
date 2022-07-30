@@ -72,8 +72,8 @@ source $HOME/.go/env
 go env -w GO111MODULE=on
 go env -w GOPROXY=https://goproxy.cn,direct
 
-echo export GOROOT=$HOME/.go >> $HOME/.profile
-echo export GOPATH=$HOME/.go >> $HOME/.profile
+echo "export GOROOT=$HOME/.go" >> $HOME/.profile
+echo "export GOPATH=$HOME/.go" >> $HOME/.profile
 
 source .bashrc
 
