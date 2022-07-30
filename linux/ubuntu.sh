@@ -7,7 +7,7 @@ goarch="amd64"
 goos="linux"
 name=wanglei4687
 email="wanglei4687@gmail.com"
-gopath=$HOME/.go
+gopath="$HOME/.go"
 
 # Update pkg
 sudo apt -y update
