@@ -55,7 +55,7 @@ sudo wget -O /tmp/go.tar.gz https://dl.google.com/go/go$version.$goos-$goarch.ta
 sudo rm -rf /usr/local/go && sudo tar -xzf /tmp/go.tar.gz
 
 sudo mkdir .go .go/bin
-sudo mv /tmp/go/bin $HOME/.go/bin
+sudo mv $HOME/go/bin $HOME/.go/bin
 
 cat $HOME/.go/env << EOF
 case ":${PATH}:" in
@@ -85,3 +85,5 @@ echo "------------------------------"
 echo $(cargo --version --verbose)
 echo "------------------------------"
 echo $(go version)
+
+sudo rm -rf $HOME/go
