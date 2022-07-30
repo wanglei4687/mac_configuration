@@ -10,7 +10,7 @@ name=wanglei4687
 email="wanglei4687@gmail.com"
 
 # Update pkg
-sudo apt -y update 
+sudo apt -y update
 sudo apt -y upgrade
 
 # Install develop tools
@@ -23,7 +23,7 @@ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)
 
 ## git setting
 git config --global user.email $email
- git config --global user.name $name
+git config --global user.name $name
 
 # Install pg client
 sudo apt update
@@ -34,6 +34,21 @@ pg_basebackup -V
 curl https://sh.rustup.rs -sSf | sh -s -- -y
 source ~/.cargo/env
 
+cat > ~/.cargo/config <<EOF
+[source.crates-io]
+registry = "https://github.com/rust-lang/crates.io-index"
+
+replace-with = 'tuna'
+[source.tuna]
+registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
+
+#replace-with = 'ustc'
+#[source.ustc]
+#registry = "git://mirrors.ustc.edu.cn/crates.io-index"
+
+[net]
+git-fetch-with-cli = true
+EOF
 
 # go
 wget_output=$(wget -O /tmp/go.$version.tar.gz https://storage.googleapis.com/golang/go$version.$goos-$goarch.tar.gz)
@@ -55,6 +70,10 @@ mkdir -p "$workspace"
 sudo sh -c  'echo export "GOPATH=$workspace" >> "$HOME/.bashrc"'
 sudo sh -c 'echo export "PATH=$PATH:/usr/local/go/bin:$GOPATH/bin" >> "$HOME/.bashrc"'
 source "$HOME/.bashrc"
+
+go env -w GO111MODULE=on
+go env -w GOPROXY=https://goproxy.cn,direct
+
 
 echo "complete: go $version installed"
 echo "  GOPATH=$workspace"
