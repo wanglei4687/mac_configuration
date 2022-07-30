@@ -52,9 +52,9 @@ EOF
 
 # go
 wget -O /tmp/go.tar.gz https://dl.google.com/go/go$version.$goos-$goarch.tar.gz 
-rm -rf /usr/local/go && sudo tar -xzf /tmp/go.tar.gz
+rm -rf /usr/local/go && tar -xzf /tmp/go.tar.gz
 
-mkdir .go .go/bin
+mkdir .go/bin
 mv $HOME/go/bin/* $HOME/.go/bin
 touch $HOME/.go
 cat > $HOME/.go/env <<EOF
