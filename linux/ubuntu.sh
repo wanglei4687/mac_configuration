@@ -5,7 +5,6 @@ set -e
 version="1.18.4"
 goarch="amd64"
 goos="linux"
-workspace="$HOME/go"
 name=wanglei4687
 email="wanglei4687@gmail.com"
 
@@ -32,9 +31,9 @@ pg_basebackup -V
 
 # rust
 curl https://sh.rustup.rs -sSf | sh -s -- -y
-source ~/.cargo/env
+source $HOME/.cargo/env
 
-cat > ~/.cargo/config <<EOF
+cat > $HOME/.cargo/config <<EOF
 [source.crates-io]
 registry = "https://github.com/rust-lang/crates.io-index"
 
@@ -51,29 +50,32 @@ git-fetch-with-cli = true
 EOF
 
 # go
-wget_output=$(wget -O /tmp/go.$version.tar.gz https://storage.googleapis.com/golang/go$version.$goos-$goarch.tar.gz)
-if [ $? -ne 0 ]; then
-	echo "unable to install go $version"
-	echo $wget_output
-	exit 1
-fi
+sudo wget -O /tmp/go.tar.gz https://dl.google.com/go/go$version.$goos-$goarch.tar.gz 
+sudo rm -rf /usr/local/go && sudo tar -xzf /tmp/go.tar.gz
 
-tar_output=$(sudo tar -C /usr/local -xzf /tmp/go.$version.tar.gz)
-if [ $? -ne 0 ]; then
-	echo "unable to install go $version"
-	echo $tar_output
-	exit 1
-fi
+sudo mkdir .go .go/bin
+sudo mv /tmp/go/bin $HOME/.go/bin
 
-# go was successfully downloaded and installed; set up the workspace
-mkdir -p "$workspace"
-sudo sh -c  'echo export "GOPATH=$workspace" >> "$HOME/.bashrc"'
-sudo sh -c 'echo export "PATH=$PATH:/usr/local/go/bin:$GOPATH/bin" >> "$HOME/.bashrc"'
-source "$HOME/.bashrc"
+cat $HOME/.go/env << EOF
+case ":${PATH}:" in
+    *:"$HOME/.go/bin":*)
+        ;;
+    *)
+        export PATH="$HOME/.go/bin:$PATH"
+        ;;
+esac
+EOF
+
+source $HOME/.go/env
 
 go env -w GO111MODULE=on
 go env -w GOPROXY=https://goproxy.cn,direct
 
-
-echo "complete: go $version installed"
-echo "  GOPATH=$workspace"
+echo "------------------------------"
+echo  $(rustup --verison)
+echo "------------------------------"
+echo $(rustup toolchain list)
+echo "------------------------------"
+echo $(cargo --version --verbose)
+echo "------------------------------"
+echo $(go version)
