@@ -51,13 +51,13 @@ git-fetch-with-cli = true
 EOF
 
 # go
-sudo wget -O /tmp/go.tar.gz https://dl.google.com/go/go$version.$goos-$goarch.tar.gz 
-sudo rm -rf /usr/local/go && sudo tar -xzf /tmp/go.tar.gz
+wget -O /tmp/go.tar.gz https://dl.google.com/go/go$version.$goos-$goarch.tar.gz 
+rm -rf /usr/local/go && sudo tar -xzf /tmp/go.tar.gz
 
-sudo mkdir .go .go/bin
-sudo mv $HOME/go/bin/* $HOME/.go/bin
-
-sudo cat > $HOME/.go/env << EOF
+mkdir .go .go/bin
+mv $HOME/go/bin/* $HOME/.go/bin
+touch $HOME/.go
+cat > $HOME/.go/env <<EOF
 case ":${PATH}:" in
     *:"$HOME/.go/bin":*)
         ;;
@@ -86,4 +86,4 @@ echo $(cargo --version --verbose)
 echo "------------------------------"
 echo $(go version)
 
-sudo rm -rf $HOME/go
+rm -rf $HOME/go
