@@ -31,10 +31,10 @@ sudo apt install postgresql-client-11
 pg_basebackup -V
 
 # rust
-curl https://sh.rustup.rs -sSf | sh -s -- -y
+sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
 source $HOME/.cargo/env
 
-cat > $HOME/.cargo/config <<EOF
+sudo cat > $HOME/.cargo/config <<EOF
 [source.crates-io]
 registry = "https://github.com/rust-lang/crates.io-index"
 
@@ -57,7 +57,7 @@ sudo rm -rf /usr/local/go && sudo tar -xzf /tmp/go.tar.gz
 sudo mkdir .go .go/bin
 sudo mv $HOME/go/bin/* $HOME/.go/bin
 
-cat > $HOME/.go/env << EOF
+sudo cat > $HOME/.go/env << EOF
 case ":${PATH}:" in
     *:"$HOME/.go/bin":*)
         ;;
