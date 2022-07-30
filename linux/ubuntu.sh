@@ -75,7 +75,7 @@ source $HOME/.profile
 go env -w GOPROXY=https://goproxy.cn,direct
 
 echo "------------------------------"
-echo  $(rustup --verison)
+echo  $(rustup --version)
 echo "------------------------------"
 echo $(rustup toolchain list)
 echo "------------------------------"
