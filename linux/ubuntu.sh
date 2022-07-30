@@ -7,6 +7,7 @@ goarch="amd64"
 goos="linux"
 name=wanglei4687
 email="wanglei4687@gmail.com"
+gopath = $HOME/.go
 
 # Update pkg
 sudo apt -y update
@@ -70,6 +71,11 @@ source $HOME/.go/env
 
 go env -w GO111MODULE=on
 go env -w GOPROXY=https://goproxy.cn,direct
+
+echo export GOROOT=$HOME/.go >> $HOME/.profile
+echo export GOPATH=$HOME/.go >> $HOME/.profile
+
+source .bashrc
 
 echo "------------------------------"
 echo  $(rustup --verison)
