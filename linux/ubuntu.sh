@@ -69,7 +69,6 @@ EOF
 source $HOME/.go/env
 
 echo "export GOROOT=$HOME/.go" >> $HOME/.profile
-echo "export GOPATH=$HOME/.go" >> $HOME/.profile
 
 source $HOME/.profile
 
