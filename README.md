@@ -1,42 +1,9 @@
-# mac_configuration
+# OS_CONFIG
 
-## ZSH
+## how to use
 
-- oh-my-zsh
-- [Powerlevel10k](https://github.com/romkatv/powerlevel10k)
-- [nerd-fonts](https://github.com/ryanoasis/nerd-fonts)
+### ubunu (wsl)
 
-## ITERM2
-
-- Ayu Mirage.itermcolors
-
-## SSH
-
-- Tabby
-
-## Email
-
-- Spark
-
-## Editor
-
-- Visual Studio Code
-- Emacs
-
-## Download
-
-- Dowine4
-
-## Research
-
-- Zettlr
-- Zotero
-- MacTex
-
-## PDF
-
-- Calibre
-
-## Vedio
-
-- IINA
+```shell
+bash <(curl -s -L https://wanglei4687.github.io/os_config/linux/ubuntu.sh)
+```
