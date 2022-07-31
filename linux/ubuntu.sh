@@ -55,7 +55,7 @@ EOF
 wget -O $HOME/go.tar.gz https://dl.google.com/go/go$version.$goos-$goarch.tar.gz 
 sudo rm -rf /usr/local/go && sudo tar -xzf $HOME/go.tar.gz
 
-mkdir .go .go/bin
+rm -rf .go && mkdir .go .go/bin
 sudo mv $HOME/go/bin/* $HOME/.go/bin
 cat > $HOME/.go/env <<EOF
 case ":\${PATH}:" in
