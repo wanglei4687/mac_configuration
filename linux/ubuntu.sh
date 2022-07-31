@@ -67,8 +67,8 @@ case ":\${PATH}:" in
 esac
 EOF
 
-echo 'export ". \$HOME/.go/env"' >>  $HOME/.profile
-echo 'export ". \$HOME/.go/env"' >> $HOME/.bashrc
+echo ". \"\$HOME/.go/env\"" >>  $HOME/.profile
+echo ". \"\$HOME/.go/env\"" >> $HOME/.bashrc
 echo 'export GOROOT=$HOME/.go' >> $HOME/.profile
 
 source $HOME/.go/env
