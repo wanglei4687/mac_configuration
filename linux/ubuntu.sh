@@ -24,6 +24,7 @@ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)
 ## git setting
 git config --global user.email $email
 git config --global user.name $name
+ssh-keygen -t ed25519 -C $email
 
 # Install pg client
 sudo apt update
