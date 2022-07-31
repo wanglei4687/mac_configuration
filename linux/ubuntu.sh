@@ -66,13 +66,14 @@ case ":\${PATH}:" in
         ;;
 esac
 EOF
- 
+
+echo 'export ". \$HOME/.go/env"' >>  $HOME/.profile
+echo 'export ". \$HOME/.go/env"' >> $HOME/.bashrc
+echo 'export GOROOT=$HOME/.go' >> $HOME/.profile
+
 source $HOME/.go/env
-
-echo "export PATH=\$PATH:$HOME/.go/bin" >>  $HOME/.profile
-echo "export GOROOT=$HOME/.go" >> $HOME/.profile
-
 source $HOME/.profile
+source $HOME/.bashrc
 
 go env -w GOPROXY=https://goproxy.cn,direct
 
