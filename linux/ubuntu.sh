@@ -35,21 +35,8 @@ pg_basebackup -V
 sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
 source $HOME/.cargo/env
 
-sudo cat > $HOME/.cargo/config <<EOF
-[source.crates-io]
-registry = "https://github.com/rust-lang/crates.io-index"
-
-replace-with = 'tuna'
-[source.tuna]
-registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
-
-#replace-with = 'ustc'
-#[source.ustc]
-#registry = "git://mirrors.ustc.edu.cn/crates.io-index"
-
-[net]
-git-fetch-with-cli = true
-EOF
+# config rust proxy, default sjtu mirror
+curl -o ~/.cargo/config https://raw.githubusercontent.com/wanglei4687/os_config/main/cargo/config
 
 # go
 wget -O $HOME/go.tar.gz https://dl.google.com/go/go$version.$goos-$goarch.tar.gz 
