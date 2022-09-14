@@ -1,3 +1,6 @@
+#!/bin/bash
+
+cat > ~/.cargo/config <<EOF
 [source.crates-io]
 registry = "https://github.com/rust-lang/crates.io-index"
 replace-with = 'sjtu'
@@ -13,3 +16,4 @@ registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
 
 [source.rustcc]
 registry = "https://code.aliyun.com/rustcc/crates.io-index.git"
+EOF
