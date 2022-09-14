@@ -1,3 +1,7 @@
+## Notice
+
+- default mirror: sjtu 
+
 ## How to use
 
 ```shell
