@@ -2,7 +2,7 @@
 
 set -e
 
-version="1.18.4"
+version="1.20.4"
 goarch="amd64"
 goos="linux"
 name=wanglei4687
@@ -75,3 +75,6 @@ echo $(go version)
 
 sudo rm -rf $HOME/go
 sudo rm -rf $HOME/go.tar.gz
+
+# clear
+sudo apt autoremove
