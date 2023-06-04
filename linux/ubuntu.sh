@@ -18,8 +18,7 @@ sudo apt install -y gcc make build-essential cmake protobuf-compiler curl openss
  curl ca-certificates gnupg git mysql-client
 
 # update hosts config
-sudo bash -c "echo '199.232.4.133 http://raw.githubusercontent.com' >> /etc/hosts"
-
+sudo bash -c "echo '199.232.68.133 raw.githubusercontent.com' >> /etc/hosts"
 
 # Add source
 curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
@@ -81,4 +80,4 @@ sudo rm -rf $HOME/go
 sudo rm -rf $HOME/go.tar.gz
 
 # clear
-sudo apt autoremove
+sudo apt autoremove -y
