@@ -27,7 +27,7 @@ echo "python version: $python_version"
 sudo apt install python$python_version -y
 
 # nodejs
-sudo apt install nodejs npm
+sudo apt install nodejs npm -y
 
 # Add source
 curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
