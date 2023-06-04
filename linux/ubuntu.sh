@@ -7,7 +7,7 @@ goarch="amd64"
 goos="linux"
 name=wanglei4687
 email="wanglei4687@gmail.com"
-gopath="$HOME/.go"
+python_version="3.8"
 
 # Update pkg
 sudo apt -y update
@@ -19,6 +19,15 @@ sudo apt install -y gcc make build-essential cmake protobuf-compiler curl openss
 
 # update hosts config
 sudo bash -c "echo '199.232.68.133 raw.githubusercontent.com' >> /etc/hosts"
+
+# python3
+sudo apt install software-properties-common -y
+sudo add-apt-repository ppa:deadsnakes/ppa -y
+echo "python version: $python_version"
+sudo apt install python$python_version -y
+
+# nodejs
+sudo apt install nodejs npm
 
 # Add source
 curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
@@ -43,32 +52,13 @@ curl -o ~/.cargo/config https://raw.githubusercontent.com/wanglei4687/os_config/
 
 # go
 wget -O $HOME/go.tar.gz https://dl.google.com/go/go$version.$goos-$goarch.tar.gz 
-sudo rm -rf /usr/local/go && sudo tar -xzf $HOME/go.tar.gz
+sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf $HOME/go.tar.gz
 
-rm -rf .go && mkdir .go .go/bin
-sudo mv $HOME/go/bin/* $HOME/.go/bin
-cat > $HOME/.go/env <<EOF
-case ":\${PATH}:" in
-    *:"\$HOME/.go/bin":*)
-        ;;
-    *)
-        export PATH="\$HOME/.go/bin:\$PATH"
-        ;;
-esac
-EOF
+sudo bash -c  "echo 'export PATH=$PATH:/usr/local/go/bin' > $HOME/.profile"
 
-echo ". \"\$HOME/.go/env\"" >>  $HOME/.profile
-echo ". \"\$HOME/.go/env\"" >> $HOME/.bashrc
-echo 'export GOROOT=$HOME/.go' >> $HOME/.profile
-
-source $HOME/.go/env
-source $HOME/.profile
-source $HOME/.bashrc
 
 go env -w GOPROXY=https://goproxy.cn,direct
 
-# nodejs
-sudo apt install nodejs npm
 
 echo "------------------------------"
 echo  $(rustup --version)
@@ -81,8 +71,9 @@ echo $(go version)
 echo "------------------------------"
 echo "nodejs version $(node --version)"
 echo "npm version $(npm --version)"
+echo "------------------------------"
+echo "$(python3 --version)"
 
-sudo rm -rf $HOME/go
 sudo rm -rf $HOME/go.tar.gz
 
 # clear
