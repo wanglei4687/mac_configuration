@@ -78,6 +78,9 @@ echo "------------------------------"
 echo $(cargo --version --verbose)
 echo "------------------------------"
 echo $(go version)
+echo "------------------------------"
+echo "nodejs version $(node --version)"
+echo "npm version $(npm --version)"
 
 sudo rm -rf $HOME/go
 sudo rm -rf $HOME/go.tar.gz
