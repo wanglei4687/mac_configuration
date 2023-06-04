@@ -17,6 +17,21 @@ sudo apt -y upgrade
 sudo apt install -y gcc make build-essential cmake protobuf-compiler curl openssl libssl-dev libcurl4-openssl-dev pkg-config postgresql-client tmux lld \
  curl ca-certificates gnupg git mysql-client
 
+# update hosts config
+sudo cat > /etc/hosts << EOF
+# domain: github.com
+140.82.113.4 github.com
+140.82.114.9 nodeload.github.com
+140.82.112.5 api.github.com
+140.82.112.10 codeload.github.com
+185.199.108.133 raw.github.com
+185.199.108.153 training.github.com
+185.199.108.153 assets-cdn.github.com
+185.199.108.153 documentcloud.github.com
+140.82.114.17 help.github.com
+199.232.4.133 http://raw.githubusercontent.com
+EOF
+
 # Add source
 curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
