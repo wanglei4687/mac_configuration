@@ -17,6 +17,9 @@ sudo apt -y upgrade
 sudo apt install -y gcc make build-essential cmake protobuf-compiler curl openssl libssl-dev libcurl4-openssl-dev pkg-config postgresql-client tmux lld \
  curl ca-certificates gnupg git mysql-client
 
+# update hosts config
+sudo bash -c "echo '199.232.4.133 http://raw.githubusercontent.com' >> /etc/hosts"
+
 # Add source
 curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
