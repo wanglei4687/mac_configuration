@@ -67,6 +67,9 @@ source $HOME/.bashrc
 
 go env -w GOPROXY=https://goproxy.cn,direct
 
+# nodejs
+sudo apt install nodejs npm
+
 echo "------------------------------"
 echo  $(rustup --version)
 echo "------------------------------"
