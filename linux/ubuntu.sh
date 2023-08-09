@@ -144,15 +144,15 @@ function env_clear() {
 
 function install() {
     echo "Start ...."
-    base()
-    install_git()
-    install_rust()
-    install_python()
-    install_golang()
-    install_nodejs()
-    install_mysqlclient()
-    install_pgclient()
-    env_clear()
+    base
+    install_git
+    install_rust
+    install_python
+    install_golang
+    install_nodejs
+    install_mysqlclient
+    install_pgclient
+    env_clear
 }
 
 
