@@ -35,8 +35,8 @@ function install_golang() {
     echo "golang version: $golang_version"
     wget -O $HOME/go.tar.gz https://dl.google.com/go/go$golang_version.$goos-$goarch.tar.gz
     sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf $HOME/go.tar.gz
-    sudo bash -c  "echo 'export PATH=$PATH:/usr/local/go/bin' > $HOME/.profile"
-    source .profile
+    echo 'export PATH=$PATH:/usr/local/go/bin' >> $HOME/.profile
+    source $HOME/.profile
 
     # go proxy for China
     # https://goproxy.cn/
@@ -55,7 +55,7 @@ function install_golang() {
 function install_rust() {
     # rust
     echo 'export RUSTUP_DIST_SERVER="https://rsproxy.cn"' >> .bashrc
-    echo 'export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"' >> bashrc
+    echo 'export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"' >> .bashrc
     sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
     source $HOME/.cargo/env
 
@@ -93,7 +93,7 @@ function install_git() {
     git config --global user.email $email
     git config --global user.name $name
     git config --global core.editor vim
-    ssh-keygen -t ed25519 -f $HOME/.ssh/id_ed25519 -C $email -q -P ""
+#    ssh-keygen -t ed25519 -f $HOME/.ssh/id_ed25519 -C $email -q -P ""
 
 
     echo "++++++++++++++++++++++++++++++"
@@ -143,18 +143,26 @@ function env_clear() {
 }
 
 function install() {
-    echo "Start ...."
+    echo "Start..."
+    echo "Base..."
     base
+    echo "Git..."
     install_git
+    echo "Rust..."
     install_rust
+    echo "Python..."
     install_python
+    echo "Golang..."
     install_golang
+    echo "Nodejs..."
     install_nodejs
+    echo "Mysql client..."
     install_mysqlclient
+    echo "Pg client..."
     install_pgclient
+    echo "env_clear..."
     env_clear
 }
 
-
-install()
+install
 exec '$@'
