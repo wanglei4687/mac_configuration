@@ -7,7 +7,7 @@ goarch='amd64'
 goos='linux'
 name='wanglei4687'
 email='wanglei4687@gmail.com'
-python_version='3.9'
+python_version='3.11'
 pg_verison='15'
 
 function base() {
@@ -16,7 +16,7 @@ function base() {
     # Install develop tools
     sudo apt install -y gcc make build-essential cmake protobuf-compiler curl openssl \
          libssl-dev libcurl4-openssl-dev pkg-config libprotoc-dev tmux lld libtool-bin \
-         curl ca-certificates gnupg git
+         curl ca-certificates gnupg git aspell
     # update hosts config
     # sudo bash -c "echo '199.232.68.133 raw.githubusercontent.com' >> /etc/hosts"
 }
@@ -26,8 +26,12 @@ function install_python() {
     sudo apt install software-properties-common -y
     sudo add-apt-repository ppa:deadsnakes/ppa -y
     sudo apt install python$python_version -y
+    # sudo update-alternatives --config python3， chose python version, ubuntu 22.04 TLS
+    # sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1
+    # sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 2
+
     echo "++++++++++++++++++++++++++++++"
-    echo "$(python3 --version)"
+    echo "$(python$python_version --version)"
     echo "++++++++++++++++++++++++++++++"
 }
 
@@ -56,6 +60,7 @@ function install_rust() {
     # rust
     echo 'export RUSTUP_DIST_SERVER="https://rsproxy.cn"' >> .bashrc
     echo 'export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"' >> .bashrc
+    source $HOME/.bashrc
     sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
     source $HOME/.cargo/env
 
@@ -93,7 +98,9 @@ function install_git() {
     git config --global user.email $email
     git config --global user.name $name
     git config --global core.editor vim
-#    ssh-keygen -t ed25519 -f $HOME/.ssh/id_ed25519 -C $email -q -P ""
+    ssh-keygen -t ed25519 -f $HOME/.ssh/id_ed25519 -C $email -q -P ""
+
+    sleep 1
 
 
     echo "++++++++++++++++++++++++++++++"
@@ -108,8 +115,8 @@ function install_pgclient() {
     # https://wiki.postgresql.org/wiki/Apt
     curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/apt.postgresql.org.gpg >/dev/null
     sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
-    sudo apt update
-    sudo apt install postgresql-client-$pg_verison
+    sudo apt update -y 
+    sudo apt install -y postgresql-client-$pg_verison
 
 
     echo "++++++++++++++++++++++++++++++"
@@ -130,7 +137,7 @@ function install_nodejs() {
 }
 
 function install_mysqlclient() {
-    sudo apt install mysql-client
+    sudo apt install -y mysql-client
 
 
     echo "++++++++++++++++++++++++++++++"
@@ -142,6 +149,11 @@ function install_kind() {
     [ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
     chmod +x ./kind
     sudo mv ./kind /usr/local/bin/kind
+}
+
+function install_emacs() {
+    sudo snap install emacs --classic
+    git clone https://github.com/wanglei4687/.emacs.d.git ~/.emacs.d
 }
 
 function env_clear() {
@@ -168,9 +180,12 @@ function install() {
     install_mysqlclient
     echo "Pg client..."
     install_pgclient
+#    echo "Emacs..."
+#    install_emacs
     echo "env_clear..."
     env_clear
 }
 
 install
-exec '$@'
+
+exec $@
