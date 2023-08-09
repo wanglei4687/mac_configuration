@@ -138,6 +138,12 @@ function install_mysqlclient() {
     echo "++++++++++++++++++++++++++++++"
 }
 
+function install_kind() {
+    [ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
+    chmod +x ./kind
+    sudo mv ./kind /usr/local/bin/kind
+}
+
 function env_clear() {
     sudo apt autoremove -y
 }
@@ -146,6 +152,8 @@ function install() {
     echo "Start..."
     echo "Base..."
     base
+    echo "Kind..."
+    install_kind
     echo "Git..."
     install_git
     echo "Rust..."
